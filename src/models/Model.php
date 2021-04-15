@@ -25,7 +25,7 @@ class Model
 
     public function __get($key)
     {
-       
+        error_reporting(E_ALL ^ E_NOTICE);
         return $this->values[$key];
     }
 
@@ -90,17 +90,15 @@ class Model
         $sql[strlen($sql) - 1] = ')';
         $id = Database::executeSQL($sql);
         $this->id = $id;
-
     }
-
+     
     public function update(){
-        $sql="UPDATE".static::$nome_tabela."SET";
-        foreach(static::$colunas as $col){
-            $sql.= "${col}=".static::getFormatedValue($this->col).",";
+        $sql = "UPDATE " . static::$nome_tabela . " SET ";
+        foreach(static::$colunas as $col) {
+            $sql .= " ${col} = " . static::getFormatedValue($this->$col) . ",";
         }
-
-        $sql[strlen($sql)-1]=' ';
-        $sql.="WHERE id={$this->id}";
+        $sql[strlen($sql) - 1] = ' ';
+        $sql .= "WHERE id = {$this->id}";
         Database::executeSQL($sql);
     }
     private static function getFilters($where) {

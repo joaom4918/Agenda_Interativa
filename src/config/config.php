@@ -2,7 +2,7 @@
 ## no arquivo config sera criado uma serie de configurações basicas da aplicação  e uma serie de constantes que ira ajudar 
 ## a acessar as pastas de uma forma mais tranquila
 date_default_timezone_set('America/Sao_Paulo');
-setlocale(LC_TIME,'pt-br');
+setlocale(LC_ALL,'pt_BR.UTF8');
 
 // Constantes Gerais 
 define('DAILY_TIME',60*60*8);
@@ -21,8 +21,10 @@ require_once(realpath(dirname(__FILE__). '/database.php' ));
 require_once(realpath(dirname(__FILE__). '/loader.php' ));
 require_once(realpath(dirname(__FILE__). '/session.php' ));
 require_once(realpath(dirname(__FILE__). '/date_util.php' ));
+require_once(realpath(dirname(__FILE__). '/utils.php' ));
 require_once(realpath(MODEL_PATH . '/Model.php'));
 require_once(realpath(MODEL_PATH . '/User.php'));
+require_once(realpath(MODEL_PATH . '/WorkingHours.php'));
 require_once(realpath(EXCEPTION_PATH. '/AppException.php'));
 require_once(realpath(EXCEPTION_PATH. '/ValidationException.php')); 
 

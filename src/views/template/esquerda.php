@@ -7,12 +7,12 @@
             </li>
 
             <li class="nav-item">
-                <a href="day_records.php"><i class="icofont-ui-calendar mr-2">Relatorio Mensal</i></a>
+                <a href="relatorio_mensal.php"><i class="icofont-ui-calendar mr-2">Relatorio Mensal</i></a>
 
             </li>
 
             <li class="nav-item">
-                <a href="day_records.php"><i class="icofont-chart-histogram mr-2">Relatorio Gerencial</i></a>
+                <a href="relatorio_gerencial.php"><i class="icofont-chart-histogram mr-2">Relatorio Gerencial</i></a>
 
             </li>
             <li class="nav-item">
@@ -29,8 +29,8 @@
             <i class="icon icofont-hour-glass text-light"></i>
 
             <div class="info">
-                <span class="main text-light">
-                    04:23
+                <span class="main text-light" <?= $activeClock =='workedInterval' ? 'active-clock':'' ?>>
+                    <?=$workedInterval ?>
                 </span>
                 <span class="label text-light">Horas Trabalhadas</span>
             </div>
@@ -42,8 +42,8 @@
                 <i class="icon icofont-ui-alarm text-danger"></i>
 
                 <div class="info">
-                    <span class="main text-danger">
-                        14:23
+                    <span class="main text-danger" <?= $activeClock =='exitTime' ? 'active-clock':'' ?>>
+                        <?=$exitTime ?>
                     </span>
                     <span class="label text-light">Hora de Saida</span>
                 </div>

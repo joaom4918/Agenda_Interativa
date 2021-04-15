@@ -1,5 +1,5 @@
 <?php 
- loadModel('WorkingHours');
+
 
 Database::executeSQL('DELETE From working_hours');
 Database::executeSQL('DELETE From users WHERE id > 5');
@@ -11,7 +11,7 @@ function getDayTemplateByodds($regularRate,$extraRate,$lazyRate){
         'time2'=>'12:00:00',
         'time3'=>'13:00:00',
         'time4'=>'17:00:00',
-        'horas_trabalhadas'=> DAILY_TIME
+        'worked_time'=> DAILY_TIME
     ];
     
     $horaExtraTemplate=[
@@ -19,7 +19,7 @@ function getDayTemplateByodds($regularRate,$extraRate,$lazyRate){
         'time2' => '12:00:00',
         'time3' => '13:00:00',
         'time4' => '18:00:00',
-        'horas_trabalhadas' => DAILY_TIME + 3600
+        'worked_time' => DAILY_TIME + 3600
     ];
     // funcionario saiu 1 hora mais cedo
     $lazyDayTemplate=[
@@ -27,7 +27,7 @@ function getDayTemplateByodds($regularRate,$extraRate,$lazyRate){
         'time2' => '12:00:00',
         'time3' => '13:00:00',
         'time4' => '18:00:00',
-        'horas_trabalhadas' => DAILY_TIME + 1800
+        'worked_time' => DAILY_TIME + 1800
     ];
     
     $value=rand(0,100);
