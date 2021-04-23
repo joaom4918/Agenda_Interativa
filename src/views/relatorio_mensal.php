@@ -14,30 +14,30 @@
     <form class="mb-4" action="#" method="POST">
 
       <div class="input-group">
-      <?php if ($user->is_admin):  ?>
-        <select name="user" class="form-control" placeholder="selecione o usuario">
-          <?php
+        <?php if ($user->is_admin) :  ?>
+          <select name="user" class="form-control" placeholder="selecione o usuario">
+            <?php
 
-          foreach ($users as $user) {
-            $selected=$user->id === $userSelecionadoId ? 'selected' : ''; 
-            echo "<option value='{$user->id}' {$selected}>{$user->name}</option>";
-          }
-          ?>
-        </select>
+            foreach ($users as $user) {
+              $selected = $user->id === $userSelecionadoId ? 'selected' : '';
+              echo "<option value='{$user->id}' {$selected}>{$user->name}</option>";
+            }
+            ?>
+          </select>
         <?php endif  ?>
         <select name="perildo" class="form-control ml-3" placeholder="selecione o perildo">
           <?php
 
           foreach ($perildos as $key => $mes) {
             //se o periodo selecionado foi aquele que foi passado
-            $selected=$key === $perildoSelecionado ? 'selected' : ''; 
+            $selected = $key === $perildoSelecionado ? 'selected' : '';
             echo "<option value='{$key}' {$selected}>{$mes}</option>";
           }
           ?>
         </select>
 
         <button class="btn btn-primary ml-2">
-        <i class="icofont-search"></i>
+          <i class="icofont-search"></i>
         </button>
       </div>
     </form>

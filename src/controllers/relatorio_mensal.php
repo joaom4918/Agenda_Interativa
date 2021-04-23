@@ -5,25 +5,25 @@ validarSessao();
 $data_atual = new DateTime();
 $user = $_SESSION['user'];
 
-$users=null;
-$userSelecionadoId=$user->id;
+$users = null;
+$userSelecionadoId = $user->id;
 
-if($user->is_admin){
-$users=User::getAll();
-$userSelecionadoId=$_POST['user']? $_POST['user']:$user->id;
+if ($user->is_admin) {
+    $users = User::getAll();
+    $userSelecionadoId = $_POST['user'] ? $_POST['user'] : $user->id;
 }
 
-$perildoSelecionado=$_POST['perildo']? $_POST['perildo']:$data_atual->format('Y-m');
-$perildos=[];
+$perildoSelecionado = $_POST['perildo'] ? $_POST['perildo'] : $data_atual->format('Y-m');
+$perildos = [];
 
 
-for($anosDiff=2; $anosDiff <=2 ; $anosDiff++){
-    $ano=date('Y')-$anosDiff;
-        for($mes=12; $mes >=1;$mes--){
-            $date=new DateTime("{$ano}-{$mes}-1");
-            $perildos[$date->format('Y-m')]=strftime('%B de %Y',$date->getTimestamp());
-        }
+for ($anosDiff = 0; $anosDiff <= 2; $anosDiff++) {
+    $ano = date('Y') - $anosDiff;
+    for ($mes = 12; $mes >= 1; $mes--) {
+        $date = new DateTime("{$ano}-{$mes}-1");
+        $perildos[$date->format('Y-m')] = strftime('%B de %Y', $date->getTimestamp());
     }
+}
 $registros = WorkingHours::getRelatorioMensal($userSelecionadoId, $perildoSelecionado);
 
 $relatorio = [];
@@ -64,8 +64,8 @@ loadTemplateView("relatorio_mensal", [
     'relatorio' => $relatorio,
     'somaTempoTrabalho' => getTimeStringFromSeconds($somaTempoTrabalho),
     'balanco' => "{$sinal}{$balanco}",
-    'perildos'=>$perildos,
-    'perildoSelecionado'=>$perildoSelecionado, 
-    'users'=>$users,
-    'userSelecionadoId'=>$userSelecionadoId
+    'perildos' => $perildos,
+    'perildoSelecionado' => $perildoSelecionado,
+    'users' => $users,
+    'userSelecionadoId' => $userSelecionadoId
 ]);

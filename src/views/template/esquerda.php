@@ -11,14 +11,17 @@
 
             </li>
 
+            <?php if($user->is_admin):?>
             <li class="nav-item">
                 <a href="relatorio_gerencial.php"><i class="icofont-chart-histogram mr-2">Relatorio Gerencial</i></a>
 
             </li>
             <li class="nav-item">
-                <a href="day_records.php"><i class="icofont-users mr-2">Usuarios</i></a>
+                <a href="usuarios.php"><i class="icofont-users mr-2">Usuarios</i></a>
 
             </li>
+
+            <?php endif ?>
         </ul>
     </nav>
 

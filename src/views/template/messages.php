@@ -12,7 +12,7 @@ if(isset($_SESSION['message'])){
     ];
 
     if(get_class($exception )=== 'ValidationException'){
-        $errors=$exception->getErrors();
+        $errors=$exception->getErrors(); 
     }
 }
 
