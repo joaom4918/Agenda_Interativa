@@ -53,5 +53,19 @@
             </div>
 
         </div>
+
+        <div class="division2 my-3">
+            <div class="sidebar-widget">
+            <i class="icon icofont-wall-clock text-light"></i>
+
+                <div class="info">
+                    <span class="main text-danger" <?= $activeClock =='exitTime' ? 'active-clock':'' ?> >
+                        <?=date('h:i') ?>
+                    </span>
+                    <span class="label text-light">Hora Atual</span>
+                </div>
+            </div>
+
+        </div>
     </div>
 </aside>

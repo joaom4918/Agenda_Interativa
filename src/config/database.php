@@ -1,7 +1,7 @@
 <?php
 class Database{
     public static function getConnection(){
-        $envPatch= realpath(dirname(__FILE__).'/../env.ini') ;      
+        $envPatch= realpath(dirname(__FILE__).'/../env.ini');      
         $env=parse_ini_file($envPatch);
         $conexao=new mysqli($env['host'],$env['username'],$env['senha'],$env['database']); 
 
