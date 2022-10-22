@@ -268,3 +268,8 @@ footer.rodape{
 .summary-box .value{
     font-size: 1.8rem;
 }
+
+#usuario{
+ font-size: 1.8rem;
+ font-weight: bold;   
+}
