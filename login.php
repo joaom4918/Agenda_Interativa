@@ -1,38 +1,35 @@
 <?php
+
 session_start();
-$email = $_POST['email'];
-$senha = $_POST['senha'];
+$email=$_POST['email'];
+$senha=$_POST['senha'];
 
-
-
-if ($email) {
-    $usuarios =
+if($email){
+    $usuarios=[
         [
-            [
-                "nome" => "joao",
-                "email" => "joao@gmail.com",
-                "senha" => "123",
-            ]
-        ];
+            "nome"=>"joao",
+            "email"=>"joaom4936@gmail.com",
+            "senha"=>"Palmeiras123",
+        ]
+     
+    ];
 
+    foreach($usuarios as $usuario){
+      $emailValido=$email==$usuario['email'];
+      $senhaValida=$senha==$usuario['senha'];
+      if($emailValido && $senhaValida){
+        $_SESSION['erros']=null;
+        $_SESSION['usuario']=$usuario['nome'];
+        header("Location:index.php");
+      }
 
-    foreach ($usuarios as $usuario) {
-        $emailValido = $email == $usuario['email'];
-        $senhaValida = $senha == $usuario['senha'];
-
-        if ($emailValido && $senhaValida) {
-            $_SESSION['erros'] = null;
-            $_SESSION['usuario'] = $usuario['nome'];
-            header("Location:index.php");
-        }
-
-        if (!$_SESSION['usuario']) {
-            $_SESSION['erros'] = ['senha/usuario invalido'];
-        }
+      if(!$_SESSION['usuario']){
+        $_SESSION['erros']=["senha/email invalidos"];
+      }
     }
+
+    
 }
-
-
 
 
 ?>
@@ -45,7 +42,7 @@ if ($email) {
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Page Title - SB Admin</title>
+    <title>Agenda Interativa</title>
     <link href="assets/css/styles.css" rel="stylesheet" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script>
 </head>
@@ -64,32 +61,32 @@ if ($email) {
                                 <div class="card-body">
                                     <div>
                                         <?php foreach ($_SESSION['erros'] as $erro) : ?>
-                                    <p style="color:red;"><?= $erro ?> </p>
-                                <?php endforeach ?>
+                                            <p style="color:red;"><?= $erro ?> </p>
+                                        <?php endforeach ?>
+                                    </div>
+                                    <form action="#" method="POST">
+                                        <div class="form-group">
+                                            <label class="small mb-1" for="inputEmailAddress">Email</label>
+                                            <input class="form-control py-4" id="inputEmailAddress" name="email" type="email" placeholder="Enter email address" />
                                         </div>
-                                <form action="#" method="POST">
-                                    <div class="form-group">
-                                        <label class="small mb-1" for="inputEmailAddress">Email</label>
-                                        <input class="form-control py-4" id="inputEmailAddress" name="email" type="email" placeholder="Enter email address" />
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="small mb-1" for="inputPassword">Password</label>
-                                        <input class="form-control py-4" id="inputPassword" name="senha" type="password" placeholder="Enter password" />
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="custom-control custom-checkbox">
-                                            <input class="custom-control-input" id="rememberPasswordCheck" type="checkbox" />
-                                            <label class="custom-control-label" for="rememberPasswordCheck">Remember password</label>
+                                        <div class="form-group">
+                                            <label class="small mb-1" for="inputPassword">Password</label>
+                                            <input class="form-control py-4" id="inputPassword" name="senha" type="password" placeholder="Enter password" />
                                         </div>
-                                    </div>
-                                    <div class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
-                                        <a class="small" href="password.html">Forgot Password?</a>
-                                        <button class="btn btn-primary">login</button>
-                                    </div>
-                                </form>
+                                        <div class="form-group">
+                                            <div class="custom-control custom-checkbox">
+                                                <input class="custom-control-input" id="rememberPasswordCheck" type="checkbox" />
+                                                <label class="custom-control-label" for="rememberPasswordCheck">Remember password</label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
+                                            <a class="small" href="password.html">esqueceu sua senha?</a>
+                                            <button class="btn btn-primary">login</button>
+                                        </div>
+                                    </form>
                                 </div>
                                 <div class="card-footer text-center">
-                                    <div class="small"><a href="register.html">Need an account? Sign up!</a></div>
+                                    <div class="small"><a href="db/registrar_usuario.php">Não tem uma conta ainda? Clique aqui</a></div>
                                 </div>
                             </div>
                         </div>
@@ -102,7 +99,7 @@ if ($email) {
                 <div class="container-fluid">
                     <div class="d-flex align-items-center justify-content-between small">
                         <div class="text-muted">JM Produções <?= date('Y') ?></div>
-                        <div>
+                        <div> 
                             <a href="#">Privacy Policy</a>
                             &middot;
                             <a href="#">Terms &amp; Conditions</a>
