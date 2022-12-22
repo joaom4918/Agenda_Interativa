@@ -1,36 +1,36 @@
 <?php
 
 session_start();
-$email=$_POST['email'];
-$senha=$_POST['senha'];
 
-if($email){
-    $usuarios=[
-        [
-            "nome"=>"joao",
-            "email"=>"joaom4936@gmail.com",
-            "senha"=>"Palmeiras123",
-        ]
-     
-    ];
+// print_r($_REQUEST);
 
-    foreach($usuarios as $usuario){
-      $emailValido=$email==$usuario['email'];
-      $senhaValida=$senha==$usuario['senha'];
-      if($emailValido && $senhaValida){
-        $_SESSION['erros']=null;
-        $_SESSION['usuario']=$usuario['nome'];
+    // Acessa
+    include_once('./db/conexao.php');
+    $conexao = novaconexao();
+    $email = mysqli_real_escape_string($conexao,$_POST['email']);
+    $senha = mysqli_real_escape_string($conexao,$_POST['senha']);
+    
+    
+
+    $sql = "SELECT email,senha FROM usuario WHERE email = '$email' and senha = md5('$senha')"; 
+
+    $result = $conexao->query($sql);
+
+    $row=mysqli_num_rows($result);
+ 
+    var_dump($sql);
+    if($row == 1){
+        $_SESSION['usuario']=$email;
         header("Location:index.php");
-      }
-
-      if(!$_SESSION['usuario']){
-        $_SESSION['erros']=["senha/email invalidos"];
-      }
+        exit();
     }
 
+ 
+    if(!$_SESSION['usuario']){
+        $_SESSION['erros']=["senha email invalidos"];
+    }
+  
     
-}
-
 
 ?>
 <!DOCTYPE html>
@@ -99,7 +99,7 @@ if($email){
                 <div class="container-fluid">
                     <div class="d-flex align-items-center justify-content-between small">
                         <div class="text-muted">JM Produções <?= date('Y') ?></div>
-                        <div> 
+                        <div>
                             <a href="#">Privacy Policy</a>
                             &middot;
                             <a href="#">Terms &amp; Conditions</a>

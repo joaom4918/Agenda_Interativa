@@ -26,14 +26,14 @@ if(count($_POST)>0){
     $nome=$dados['nome'];
     $sobrenome=$dados['sobrenome'];
     $email=$dados['email'];
-    $senha=crypt("Abc",$dados['senha']);
+    $senha=$dados['senha'];
 
     if(count($erros)==0){
    
         $inserir="INSERT INTO usuario(nome,sobrenome,email,senha) VALUES (?,?,?,?)";
         $stmt=$conexao->prepare($inserir);
         $params=[
-            $nome,$sobrenome,$email,$senha
+            $nome,$sobrenome,$email,md5($senha)
         ];
 
         $stmt->bind_param("ssss",...$params);
@@ -79,7 +79,7 @@ if(count($_POST)>0){
                                         <div class="form-row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label class="small mb-1" for="inputFirstName">First Name</label>
+                                                    <label class="small mb-1" for="inputFirstName">Nome</label>
                                                     <input class="form-control py-4 <?= $erros['nome'] ? 'is-invalid' : '' ?>" name="nome" id="inputFirstName" type="text" placeholder="Enter first name" />
                                                     <div class="invalid-feedback">
                                                         <?= $erros['nome'] ?>
@@ -89,7 +89,7 @@ if(count($_POST)>0){
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label class="small mb-1" for="inputLastName">Last Name</label>
+                                                    <label class="small mb-1" for="inputLastName">Sobrenome</label>
                                                     <input class="form-control py-4 <?= $erros['sobrenome'] ? 'is-invalid' : '' ?>" name="sobrenome" id="inputLastName" type="text" placeholder="Enter last name" />
                                                     <div class="invalid-feedback">
                                                         <?= $erros['sobrenome'] ?>
@@ -108,7 +108,7 @@ if(count($_POST)>0){
                                         <div class="form-row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label class="small mb-1" for="inputPassword">Password</label>
+                                                    <label class="small mb-1" for="inputPassword">Senha</label>
                                                     <input class="form-control py-4 <?=$erros['senha']?'is-invalid':''?>" name="senha" id="inputPassword" type="password" placeholder="Enter password" />
                                                     <div class="invalid-feedback">
                                                         <?= $erros['senha'] ?>
@@ -121,7 +121,7 @@ if(count($_POST)>0){
                                     </form>
                                 </div>
                                 <div class="card-footer text-center">
-                                    <div class="small"><a href="login.php">Have an account? Go to login</a></div>
+                                    <div class="small"><a href="../login">Ja possui uma conta? ir para o login</a></div> 
                                 </div>
                             </div>
                         </div>
