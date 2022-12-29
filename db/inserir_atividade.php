@@ -1,69 +1,73 @@
-<?php
-session_start();
-if(!$_SESSION['usuario']){
-header("Location:login.php");
+<?php include("../base.php"); ?>
+
+<?php 
+include("./conexao.php");
+$conexao=novaconexao();
+
+
+if(count($_POST)>0){
+    $erros=[];
+    if(!filter_input(INPUT_POST,'descricao')){
+        $erros['descricao']="voce não colocou nenhuma atividade";
+    }
+
+    if(!filter_input(INPUT_POST,'data')){
+        $erros['data']="voce não digitou a data";
+    }
+
+    if(!filter_input(INPUT_POST,'horario')){
+        $erros['horario']="voce não digitou o horario";
+    }
+
+    $descricao=$_POST['descricao'];
+    $data=$_POST['data'];
+    $horario=$_POST['horario'];
+    if(count($erros)==0){
+        $inserir="INSERT INTO atividade (descricao,data,horario) VALUES(?,?,?)";
+        $stmt=$conexao->prepare($inserir);
+        $params=[$descricao,$data,$horario];
+        $stmt->bind_param("sss",...$params);
+        if($stmt->execute()){
+            unset($_POST);
+        }
+    }
+
 }
 
-
-
 ?>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../assets/css/comun.css">
-    <link rel="stylesheet" href="assets/css/icofont.min.css">
-    <link rel="stylesheet" href="../assets/css/template.css"> 
-  
-
-    <title>Ponto eletronico</title>
+    <title>Document</title>
 </head>
-<body class="hide-sidebar">
 
-    <header class="header">
-        <div class="logo">
-        <i class="icofont-attachment"></i>
-
-            <span class="font-weight-bold bg-success text-white">Agenda Diaria</span>
-        
+<body>
+    <form action="#" method="post">
+        <label for="descricao">Descrição</label>
+        <input type="text" class="form-control <?=$erros['descricao']?'is-invalid':'' ?>" name="descricao" placeholder="atividade diaria "><br>
+        <div class="invalid-feedback">
+            <?=$erros['descricao'] ?>
+        </div>
+        <label for="data">Data</label><br>
+        <input type="date" class="form-control<?=$erros['data']?'is-invalid':'' ?>" name="data" placeholder="data"><br>
+        <div class="invalid-feedback">
+        <?=$erros['data'] ?>
         </div>
 
-        <div class="menu-toggle mx-3">
-            <i class="icofont-navigation-menu"></i>
+        <label for="horario">Horario</label>
+        <input type="time" class="form-control <?=$erros['horario']?'is-invalid':'' ?>" name="horario" placeholder="digite o horario">
+        <div class="invalid-feedback">
+        <?=$erros['horario'] ?>
         </div>
 
-        <div class="spacer"></div>
-        <div class="dropdown">
-            <div class="dropdown-button">
-            <span id="usuario"><?= $_SESSION['usuario'] ?></span> 
-                <img class="avatar" src="<?= "http://www.gravatar.com/avatar.php?gravatar_id="
-                                                . md5(strtolower(trim($_SESSION['user']->email))) ?>" alt="user">
-                <span class="ml-3">
-                    <?= $_SESSION['user']->name ?>
+        <br>
+        <button class="btn btn-primary">salvar atividade</button>
 
-                </span>
-                <i class="icofont-simple-down mx-2"></i>
-            </div>
-            <div class="dropdown-content">
-                <ul class="nav-list">
-                    
-                       
-                    
-                    <li class="nav-item">
-                        <a href="logout.php">
-                            <i class="icofont-logout mr-2"></i>
-                            Sair
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </header>
-   <?php include("menu.php") ?>
-<?php include("rodape.php") ?>
-<script src="assets/js/app.js"></script>
+    </form>
 </body>
 
 </html>

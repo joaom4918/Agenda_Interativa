@@ -7,7 +7,7 @@
             </li>
 
             <li class="nav-item">
-                <a href="relatorio_mensal.php"><i class="icofont-ui-calendar mr-2">Conferir atividades diarias</i></a>
+                <a href="db/conferir_atividades.php"><i class="icofont-ui-calendar mr-2">Conferir atividades diarias</i></a>
 
             </li>
 
