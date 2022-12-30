@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <?php session_start() ?>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,14 +10,23 @@
     <link rel="stylesheet" href="../assets/css/comun.css">
     <link rel="stylesheet" href="../assets/css/icofont.min.css">
     <link rel="stylesheet" href="../assets/css/template.css">
-    
+
     <title>Document</title>
 </head>
+
 <body>
-<?php include("menu.php") ?>
+
+    
+        <?php include("../menu.php") ?>
+     
+        <?php include("../cabecalho.php") ?>
+        <?php include("../rodape.php") ?>
+
+    
 
 
-<?php include("cabecalho.php") ?>
-<?php include("rodape.php") ?>
+
+
 </body>
+
 </html>

@@ -2,12 +2,12 @@
     <nav class="menu mt-3">
         <ul class="nav-list">
             <li class="nav-item">
-                <a href="db/inserir_atividade.php"><i class="icofont-ui-check mr-2">inserir atividade</i></a>
+                <a href="inserir_atividade.php"><i class="icofont-ui-check mr-2">inserir atividade</i></a>
 
             </li>
 
             <li class="nav-item">
-                <a href="db/conferir_atividades.php"><i class="icofont-ui-calendar mr-2">Conferir atividades diarias</i></a>
+                <a href="conferir_atividades.php"><i class="icofont-ui-calendar mr-2">Conferir atividades diarias</i></a>
 
             </li>
 
