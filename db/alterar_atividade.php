@@ -15,7 +15,7 @@ if($_GET['alterar']){
         }
     
     }
-}
+} 
 if(count($_POST)>0){
     $erros=[];
     $dados=$_POST;
@@ -36,14 +36,19 @@ if(count($_POST)>0){
     $horario=$dados['horario'];
     $idatv=$dados['idatv'];
     if(count($erros)==0){
-        $alterar="UPDATE descricao=? data=? horario=? FROM atividade where idatv";
-        $stmt=$conexao->prepare($alterar);
-        $params=[$descricao,$data,$horario,$idatv];
+        $alterar = "UPDATE atividade SET descricao=?,horario=?, data=? WHERE idatv=?";
+        $stmt=$conexao->prepare($alterar); 
+        $params=[$descricao,$horario,$data,$idatv];
+        var_dump($params);
         $stmt->bind_param("sssi",...$params);
-        if($stmt->execute()){
-            unset($dados);
-            header("Location:conferir_atividades.php");
-        }
+       if($stmt->execute()){
+        unset($dados);
+        header("Location:conferir_atividades.php");
+       
+       
+       }
+         
+      
     }
 
 }
@@ -60,7 +65,10 @@ if(count($_POST)>0){
 </head>
 
 <body>
+
+
     <form action="#" method="post">
+    <input type="hidden" name="idatv" value="<?= $dados['idatv'] ?>">
         <label for="descricao">Descrição</label>
         <input type="text"  value="<?=$dados['descricao']?>" class="form-control<?=$erros['descricao']?'is-invalid':'' ?>" name="descricao" placeholder="atividade diaria "><br>
         <div class="invalid-feedback">
